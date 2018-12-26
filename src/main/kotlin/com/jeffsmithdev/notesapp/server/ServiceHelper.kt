@@ -1,9 +1,9 @@
-package com.fattysmurff.notesapp.server
+package com.jeffsmithdev.notesapp.server
 
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.newFixedThreadPoolContext
+import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.transactions.transaction
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlin.coroutines.CoroutineContext
 
 object ServiceHelper {
     private val dispatcher: CoroutineContext

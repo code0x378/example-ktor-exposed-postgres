@@ -1,6 +1,6 @@
-package com.fattysmurff.notesapp.server
+package com.jeffsmithdev.notesapp.server
 
-import com.fattysmurff.notesapp.server.note.Notes
+import com.jeffsmithdev.notesapp.server.note.Notes
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll

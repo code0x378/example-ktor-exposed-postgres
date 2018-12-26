@@ -1,4 +1,4 @@
-package com.fattysmurff.notesapp.server.note
+package com.jeffsmithdev.notesapp.server.note
 
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

@@ -1,9 +1,9 @@
-package com.fattysmurff.notesapp.server
+package com.jeffsmithdev.notesapp.server
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.SerializationFeature
-import com.fattysmurff.notesapp.server.note.note
-import com.fattysmurff.notesapp.server.note.NoteService
+import com.jeffsmithdev.notesapp.server.note.note
+import com.jeffsmithdev.notesapp.server.note.NoteService
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.Application

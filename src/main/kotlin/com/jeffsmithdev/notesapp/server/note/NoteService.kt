@@ -1,6 +1,6 @@
-package com.fattysmurff.notesapp.server.note
+package com.jeffsmithdev.notesapp.server.note
 
-import com.fattysmurff.notesapp.server.ServiceHelper.dbQuery
+import com.jeffsmithdev.notesapp.server.ServiceHelper.dbQuery
 import org.jetbrains.exposed.sql.*
 import org.joda.time.DateTime
 import java.util.*
