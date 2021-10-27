@@ -11,7 +11,7 @@ fun Route.note(noteService: NoteService) {
 
     route("/notes") {
 
-        get("/") {
+        get("") {
             call.respond(noteService.getAllNotes())
         }
 
@@ -21,12 +21,12 @@ fun Route.note(noteService: NoteService) {
             else call.respond(note)
         }
 
-        post("/") {
+        post("") {
             val note = call.receive<Note>()
             call.respond(noteService.addNote(note))
         }
 
-        put("/") {
+        put("") {
             val note = call.receive<Note>()
             call.respond(noteService.updateNote(note))
         }
