@@ -2,18 +2,19 @@ package com.jeffsmithdev.notesapp.server.note
 
 import com.jeffsmithdev.notesapp.server.ServiceHelper.dbQuery
 import org.jetbrains.exposed.sql.*
-import org.joda.time.DateTime
+import org.jetbrains.exposed.sql.javatime.datetime
+import java.time.LocalDateTime
 import java.util.*
 
 object Notes : Table() {
-    val id = uuid("id").primaryKey()
+    val id = uuid("id")
     val title = text("title")
     val body = text("body")
     val ref = text("ref")
     val version = integer("version")
-    val createdAt = date("created_at")
+    val createdAt = datetime("created_at")
     val createdBy = text("created_by")
-    val updatedAt = date("updated_at")
+    val updatedAt = datetime("updated_at")
     val updatedBy = text("updated_by")
 }
 
@@ -38,9 +39,9 @@ class NoteService {
                 it[title] = note.title
                 it[body] = note.body
                 it[version] = note.version + 1
-                it[createdAt] = DateTime()
+                it[createdAt] = LocalDateTime.now()
                 it[createdBy] = note.createdBy
-                it[updatedAt] = DateTime()
+                it[updatedAt] = LocalDateTime.now()
                 it[updatedBy] = note.updatedBy
             }
         }
@@ -49,9 +50,7 @@ class NoteService {
 
     suspend fun updateNote(note: Note): Note {
         val id = note.id
-        return if (id == null) {
-            addNote(note)
-        } else {
+        return run {
             dbQuery {
                 Notes.update({ Notes.id eq id }) {
                     it[Notes.id] = note.id
@@ -61,7 +60,7 @@ class NoteService {
                     it[version] = note.version + 1
                     it[createdAt] = note.createdAt
                     it[createdBy] = note.createdBy
-                    it[updatedAt] = DateTime()
+                    it[updatedAt] = LocalDateTime.now()
                     it[updatedBy] = note.updatedBy
                 }
             }

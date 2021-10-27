@@ -1,6 +1,6 @@
 package com.jeffsmithdev.notesapp.server.note
 
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 import java.util.*
 
 data class Note(
@@ -9,8 +9,8 @@ data class Note(
         val ref: String = "",
         val body: String = "",
         val version: Int = 0,
-        val createdAt: DateTime = DateTime(),
+        val createdAt: LocalDateTime = LocalDateTime.now(),
         val createdBy: String = "",
-        val updatedAt: DateTime = DateTime(),
+        val updatedAt: LocalDateTime = LocalDateTime.now(),
         val updatedBy:String = ""
 )
