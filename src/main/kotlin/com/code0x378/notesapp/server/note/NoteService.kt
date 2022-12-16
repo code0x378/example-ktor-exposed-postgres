@@ -1,6 +1,6 @@
-package com.jeffsmithdev.notesapp.server.note
+package com.code0x378.notesapp.server.note
 
-import com.jeffsmithdev.notesapp.server.ServiceHelper.dbQuery
+import com.code0x378.notesapp.server.ServiceHelper.dbQuery
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.javatime.datetime
 import java.time.LocalDateTime
@@ -20,20 +20,23 @@ object Notes : Table() {
 
 class NoteService {
 
+    @kotlinx.coroutines.ObsoleteCoroutinesApi
     suspend fun getAllNotes(): List<Note> = dbQuery {
         Notes.selectAll().map { toNote(it) }
     }
 
+    @kotlinx.coroutines.ObsoleteCoroutinesApi
     suspend fun getNote(id: UUID): Note? = dbQuery {
         Notes.select {
             (Notes.id eq id)
         }.mapNotNull { toNote(it) }
-                .singleOrNull()
+            .singleOrNull()
     }
 
+    @kotlinx.coroutines.ObsoleteCoroutinesApi
     suspend fun addNote(note: Note): Note {
         dbQuery {
-            Notes.insert() {
+            Notes.insert {
                 it[id] = note.id
                 it[ref] = note.ref
                 it[title] = note.title
@@ -48,6 +51,7 @@ class NoteService {
         return getNote(note.id)!!
     }
 
+    @kotlinx.coroutines.ObsoleteCoroutinesApi
     suspend fun updateNote(note: Note): Note {
         val id = note.id
         return run {
@@ -68,20 +72,21 @@ class NoteService {
         }
     }
 
+    @kotlinx.coroutines.ObsoleteCoroutinesApi
     suspend fun deleteNote(id: UUID): Boolean = dbQuery {
         Notes.deleteWhere { Notes.id eq id } > 0
     }
 
     private fun toNote(row: ResultRow): Note =
-            Note(
-                    id = row[Notes.id],
-                    ref = row[Notes.ref],
-                    title = row[Notes.title],
-                    body = row[Notes.body],
-                    version = row[Notes.version],
-                    createdAt = row[Notes.createdAt],
-                    createdBy = row[Notes.createdBy],
-                    updatedAt = row[Notes.updatedAt],
-                    updatedBy = row[Notes.updatedBy]
-            )
+        Note(
+            id = row[Notes.id],
+            ref = row[Notes.ref],
+            title = row[Notes.title],
+            body = row[Notes.body],
+            version = row[Notes.version],
+            createdAt = row[Notes.createdAt],
+            createdBy = row[Notes.createdBy],
+            updatedAt = row[Notes.updatedAt],
+            updatedBy = row[Notes.updatedBy]
+        )
 }

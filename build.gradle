@@ -1,14 +1,14 @@
 buildscript {
-	ext.kotlin_version = '1.5.31'
-	ext.ktor_version = '1.6.4'
-	ext.logback_version = '1.2.6'
+	ext.kotlin_version = '1.7.2'
+	ext.ktor_version = '2.2.1'
+	ext.logback_version = '1.4.5'
 	
 	repositories {
-		jcenter()
+		mavenCentral()
 	}
 	
 	dependencies {
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.22"
 	}
 }
 
@@ -18,7 +18,7 @@ apply plugin: 'application'
 
 group 'notesapp-server'
 version '0.0.1-SNAPSHOT'
-mainClassName = "io.ktor.server.netty.DevelopmentEngine"
+mainClassName = "com.code0x378.notesapp.server.MainKt"
 
 repositories {
 	maven { url 'https://kotlin.bintray.com/ktor' }
@@ -27,28 +27,30 @@ repositories {
 }
 
 dependencies {
-	compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-	compile "ch.qos.logback:logback-classic:$logback_version"
-	compile "io.ktor:ktor-server-netty:$ktor_version"
-	compile "io.ktor:ktor-server-core:$ktor_version"
-	compile "io.ktor:ktor-html-builder:$ktor_version"
-	compile "io.ktor:ktor-velocity:$ktor_version"
-	compile "io.ktor:ktor-server-host-common:$ktor_version"
-	compile "io.ktor:ktor-auth:$ktor_version"
-	compile "io.ktor:ktor-auth-jwt:$ktor_version"
-	compile "io.ktor:ktor-jackson:$ktor_version"
-	compile "io.ktor:ktor-gson:$ktor_version"
-	compile "io.ktor:ktor-locations:$ktor_version"
-	compile "io.ktor:ktor-metrics:$ktor_version"
-	compile "io.ktor:ktor-server-sessions:$ktor_version"
-	compile "io.ktor:ktor-websockets:$ktor_version"
-    compile 'io.github.microutils:kotlin-logging:2.0.11'
-	compile group: 'org.jetbrains.exposed', name: 'exposed-java-time', version: '0.36.1'
-	compile group: 'org.jetbrains.exposed', name: 'exposed-core', version: '0.36.1'
-	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.0'
-	compile group: 'com.zaxxer', name: 'HikariCP', version: '2.7.4'
-	runtime group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+	implementation "ch.qos.logback:logback-classic:$logback_version"
+	implementation "io.ktor:ktor-server-netty:$ktor_version"
+	implementation "io.ktor:ktor-server-core:$ktor_version"
+	implementation "io.ktor:ktor-server-html-builder:$ktor_version"
+	implementation "io.ktor:ktor-server-velocity:$ktor_version"
+	implementation "io.ktor:ktor-server-host-common:$ktor_version"
+	implementation "io.ktor:ktor-server-auth:$ktor_version"
+	implementation "io.ktor:ktor-server-auth-jwt:$ktor_version"
+	implementation "io.ktor:ktor-server-content-negotiation:$ktor_version"
+	implementation "io.ktor:ktor-server-locations:$ktor_version"
+	implementation "io.ktor:ktor-server-metrics:$ktor_version"
+	implementation "io.ktor:ktor-server-sessions:$ktor_version"
+	implementation "io.ktor:ktor-server-websockets:$ktor_version"
+	implementation "io.ktor:ktor-serialization-jackson:$ktor_version"
+	implementation "io.ktor:ktor-serialization-gson:$ktor_version"
+	implementation "io.ktor:ktor-server-call-logging:$ktor_version"
+	implementation "io.ktor:ktor-server-compression:$ktor_version"
+	implementation "io.ktor:ktor-server-default-headers:$ktor_version"
+    implementation 'io.github.microutils:kotlin-logging:2.0.11'
+	implementation group: 'org.jetbrains.exposed', name: 'exposed-java-time', version: '0.36.1'
+	implementation group: 'org.jetbrains.exposed', name: 'exposed-core', version: '0.36.1'
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.0'
+	implementation group: 'com.zaxxer', name: 'HikariCP', version: '2.7.4'
+	implementation 'io.ktor:ktor-server-cors-jvm:2.2.1'
+	runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
 	runtimeOnly group: 'org.jetbrains.exposed', name: 'exposed-jdbc', version: '0.36.1'
 }
-
-kotlin.experimental.coroutines = 'enable'

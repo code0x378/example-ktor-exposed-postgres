@@ -1,4 +1,4 @@
-package com.jeffsmithdev.notesapp.server
+package com.code0x378.notesapp.server
 
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newFixedThreadPoolContext
@@ -15,10 +15,11 @@ object ServiceHelper {
     }
 
     suspend fun <T> dbQuery(
-            block: () -> T): T =
-            withContext(dispatcher) {
-                transaction { block() }
-            }
+        block: () -> T
+    ): T =
+        withContext(dispatcher) {
+            transaction { block() }
+        }
 
     //    Skip thread pool...
     //        suspend fun <T> dbQuery(

@@ -1,10 +1,10 @@
-package com.jeffsmithdev.notesapp.server.note
+package com.code0x378.notesapp.server.note
 
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.routing.*
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import java.util.*
 
 fun Route.note(noteService: NoteService) {
